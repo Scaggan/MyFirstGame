@@ -8,3 +8,4 @@ func _process(delta):
 	scroll_offset.x -= speed * delta 
 	print("Hello world Yerzat")
 	print("Пошел нахуй")
+	print("hfklsdjgkldsf")
