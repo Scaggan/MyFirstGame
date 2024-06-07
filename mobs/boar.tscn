@@ -1,0 +1,193 @@
+[gd_scene load_steps=23 format=3 uid="uid://b8frbc2t1okr6"]
+
+[ext_resource type="Texture2D" uid="uid://cgpi25pamb3wt" path="res://Ramses Free Package/Idle/Spr_Idle.png" id="1_5at8i"]
+[ext_resource type="Texture2D" uid="uid://bkye7mktqtm15" path="res://Ramses Free Package/Walk/Spr_Walk.png" id="2_ikf2l"]
+[ext_resource type="Texture2D" uid="uid://ccm03b4g0i34f" path="res://Ramses Free Package/Track/Spr_Track.png" id="3_s3fwq"]
+
+[sub_resource type="GDScript" id="GDScript_r8a35"]
+script/source = "extends CharacterBody2D
+
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+@onready var anim = $AnimatedSprite2D
+var chase = false 
+var speed = 100
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	var loki = $\"../../Loki/Loki\"
+	var direction =(loki.position - self.position).normalized()
+	if chase == true:
+		velocity.x = direction.x * speed
+		anim.play(\"run\")
+	else:
+		velocity.x = 0
+		anim.play(\"idle\")
+	if direction.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	else:
+		$AnimatedSprite2D.flip_h = false
+
+	move_and_slide()
+
+
+func _on_detector_body_entered(body):
+		if body.name == \"Loki\":
+			chase = true
+	
+
+
+
+func _on_detector_body_exited(body):
+	if body.name == \"Loki\":
+		chase = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axcnf"]
+size = Vector2(27, 17.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb3cx"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj3qk"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loj3b"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iijyo"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv3mi"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sfb6"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yg3l"]
+atlas = ExtResource("1_5at8i")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncpa3"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw7uf"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38oi"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s1wt"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u4at"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xrfw"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogshn"]
+atlas = ExtResource("2_ikf2l")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0i1q"]
+atlas = ExtResource("3_s3fwq")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b4uie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb3cx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj3qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loj3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iijyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv3mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sfb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yg3l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncpa3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw7uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38oi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s1wt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u4at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xrfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogshn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0i1q")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6peg4"]
+radius = 93.0054
+
+[node name="Boar" type="CharacterBody2D"]
+script = SubResource("GDScript_r8a35")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -2.75)
+shape = SubResource("RectangleShape2D_axcnf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -2)
+scale = Vector2(1.175, 1.075)
+sprite_frames = SubResource("SpriteFrames_b4uie")
+animation = &"run"
+autoplay = "idle"
+frame_progress = 0.646016
+
+[node name="detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detector"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_6peg4")
+
+[connection signal="body_entered" from="detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="detector" to="." method="_on_detector_body_exited"]

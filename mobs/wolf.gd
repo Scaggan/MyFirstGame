@@ -12,7 +12,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	var loki = $"../../Loki/Loki"
-	var direction = (loki.position - self.position).normalized()
+	var direction =(loki.position - self.position).normalized()
 	if alive == true:
 		if chase == true:
 			velocity.x = direction.x * speed
@@ -20,7 +20,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = 0
 			anim.play("idle")
-		if direction.x < 0:
+		if direction.x > 0:
 			$AnimatedSprite2D.flip_h = true
 		else:
 			$AnimatedSprite2D.flip_h = false
