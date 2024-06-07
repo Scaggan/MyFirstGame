@@ -848,7 +848,7 @@ script = ExtResource("1_wh363")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_v3s55")
 
-[node name="1" type="AnimatedSprite2D" parent="."]
+[node name="first" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(1, -4)
 scale = Vector2(1.09375, 1.28125)
@@ -857,7 +857,7 @@ animation = &"run"
 autoplay = "idle"
 frame_progress = 0.919181
 
-[node name="2" type="AnimatedSprite2D" parent="."]
+[node name="secend" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(1, -4)
 scale = Vector2(1.09375, 1.28125)
@@ -866,7 +866,7 @@ animation = &"run"
 autoplay = "idle"
 frame_progress = 0.573548
 
-[node name="3" type="AnimatedSprite2D" parent="."]
+[node name="three" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(1, -4)
 scale = Vector2(1.09375, 1.28125)
@@ -875,7 +875,8 @@ animation = &"run"
 autoplay = "idle"
 frame_progress = 0.0148866
 
-[node name="4" type="AnimatedSprite2D" parent="."]
+[node name="four" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(1, -4)
 scale = Vector2(1.09375, 1.28125)
 sprite_frames = SubResource("SpriteFrames_ae0rh")

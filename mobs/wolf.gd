@@ -44,7 +44,7 @@ func _on_death_body_entered(body):
 func _on_death_2_body_entered(body):
 	if body.name == "Loki":
 		if alive == true:
-			body.health -= 20
+			body.health += 1
 		death()
 
 

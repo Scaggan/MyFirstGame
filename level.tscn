@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd4gx5ckl3sow"]
+[gd_scene load_steps=11 format=3 uid="uid://dd4gx5ckl3sow"]
 
 [ext_resource type="PackedScene" uid="uid://dc40shaycl1vg" path="res://Loki/loki.tscn" id="1_ggdof"]
 [ext_resource type="PackedScene" uid="uid://b007ci777wbnw" path="res://bg.tscn" id="3_ihvqv"]
@@ -1246,6 +1246,23 @@ texture = ExtResource("5_vc4e2")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_p8x7f")
 
+[sub_resource type="GDScript" id="GDScript_m6g1h"]
+script/source = "extends CanvasLayer
+
+@onready var HP := $Label
+@onready var TP := $Label2
+@onready var Person := $\"../Loki/Loki\"
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	HP.text = \"HP: \" + str(Person.health)
+	TP.text = \"TP:\" + str(Person.TP)
+"
+
 [sub_resource type="GDScript" id="GDScript_hs6q6"]
 script/source = "extends Label
 
@@ -1284,6 +1301,9 @@ position = Vector2(1108, 486)
 [node name="wolf2" parent="Mobs" instance=ExtResource("4_pm04j")]
 position = Vector2(782, 479)
 
+[node name="wolf3" parent="Mobs" instance=ExtResource("4_pm04j")]
+position = Vector2(752, 292)
+
 [node name="Boar" parent="Mobs" instance=ExtResource("6_tgpgt")]
 position = Vector2(497, 537)
 
@@ -1291,6 +1311,7 @@ position = Vector2(497, 537)
 position = Vector2(214, 551)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_m6g1h")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 26.0
@@ -1300,5 +1321,9 @@ offset_bottom = 77.0
 theme_override_font_sizes/font_size = 30
 text = "HP"
 script = SubResource("GDScript_hs6q6")
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="BG" parent="." instance=ExtResource("3_ihvqv")]
