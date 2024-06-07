@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd4gx5ckl3sow"]
+[gd_scene load_steps=12 format=3 uid="uid://dd4gx5ckl3sow"]
 
 [ext_resource type="PackedScene" uid="uid://dc40shaycl1vg" path="res://Loki/loki.tscn" id="1_ggdof"]
+[ext_resource type="Script" path="res://level.gd" id="1_vf0a4"]
 [ext_resource type="PackedScene" uid="uid://b007ci777wbnw" path="res://bg.tscn" id="3_ihvqv"]
 [ext_resource type="PackedScene" uid="uid://cv5wemwx8b5oj" path="res://mobs/wolf.tscn" id="4_pm04j"]
 [ext_resource type="PackedScene" uid="uid://csrw3x8omnr5f" path="res://mobs/character_body_2d.tscn" id="5_sdt2c"]
 [ext_resource type="Texture2D" uid="uid://xir581cgfabr" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_vc4e2"]
 [ext_resource type="PackedScene" uid="uid://b8frbc2t1okr6" path="res://mobs/boar.tscn" id="6_tgpgt"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="6_xsr5q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p8x7f"]
 texture = ExtResource("5_vc4e2")
@@ -1246,21 +1248,11 @@ texture = ExtResource("5_vc4e2")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_p8x7f")
 
-[sub_resource type="GDScript" id="GDScript_hs6q6"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	text = \"HP: \" + str($\"../../Loki/Loki\".health)
-"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wkwj"]
+size = Vector2(3217.5, 20)
 
 [node name="level" type="Node2D"]
+script = ExtResource("1_vf0a4")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_tqufl")
@@ -1271,7 +1263,7 @@ layer_0/tile_data = PackedInt32Array(2490368, 1441793, 1, 2424833, 524289, 0, 24
 [node name="Loki" type="Node2D" parent="."]
 
 [node name="Loki" parent="Loki" instance=ExtResource("1_ggdof")]
-position = Vector2(352, 546)
+position = Vector2(66, 352)
 
 [node name="Mobs" type="Node2D" parent="."]
 
@@ -1285,12 +1277,13 @@ position = Vector2(1108, 486)
 position = Vector2(782, 479)
 
 [node name="Boar" parent="Mobs" instance=ExtResource("6_tgpgt")]
-position = Vector2(497, 537)
+position = Vector2(-102, 549)
 
 [node name="Ghost" parent="Mobs" instance=ExtResource("5_sdt2c")]
 position = Vector2(214, 551)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("6_xsr5q")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 26.0
@@ -1299,6 +1292,20 @@ offset_right = 146.0
 offset_bottom = 77.0
 theme_override_font_sizes/font_size = 30
 text = "HP"
-script = SubResource("GDScript_hs6q6")
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 28.0
+offset_top = 59.0
+offset_right = 68.0
+offset_bottom = 82.0
+text = "TP: "
 
 [node name="BG" parent="." instance=ExtResource("3_ihvqv")]
+
+[node name="target" type="Area2D" parent="."]
+position = Vector2(1258, 743)
+
+[node name="zone" type="CollisionShape2D" parent="target"]
+shape = SubResource("RectangleShape2D_0wkwj")
+
+[connection signal="body_entered" from="target" to="Loki/Loki" method="_on_target_body_entered"]
