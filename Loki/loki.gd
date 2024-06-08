@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @onready var stateCats := [$first,$secend,$three,$four]
 var SPEED = 200.0
-const JUMP_VELOCITY = -400.0
-var TP := 5
+const JUMP_VELOCITY = -430
+var TP := 100
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

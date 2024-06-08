@@ -166,7 +166,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6peg4"]
-radius = 93.0054
+radius = 34.0147
 
 [node name="Boar" type="CharacterBody2D"]
 script = SubResource("GDScript_r8a35")
@@ -186,7 +186,6 @@ frame_progress = 0.646016
 [node name="detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detector"]
-position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_6peg4")
 
 [connection signal="body_entered" from="detector" to="." method="_on_detector_body_entered"]

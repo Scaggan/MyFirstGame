@@ -849,13 +849,11 @@ script = ExtResource("1_wh363")
 shape = SubResource("CapsuleShape2D_v3s55")
 
 [node name="first" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(1, -4)
-scale = Vector2(1.09375, 1.28125)
+position = Vector2(0.25, -4)
+scale = Vector2(1.04688, 1.28125)
 sprite_frames = SubResource("SpriteFrames_pjwwc")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.919181
 
 [node name="secend" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -886,10 +884,9 @@ frame_progress = 0.891436
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -4)
-zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = 0
-limit_right = 1147
+limit_right = 1160
 limit_bottom = 600
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
